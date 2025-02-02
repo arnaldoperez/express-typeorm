@@ -1,99 +1,31 @@
 FAIL ./test.js
   Pruebas express
-    × POST /tTest results saved to test-results.txt
- ms)
-    × GET /tasks debería obtener todas las tareas (7 ms)
-    × GET /tasks/:id debería obtener una tarea por ID (9 ms)
-    × PUT /tasks/:id debería actualizar una tarea existente (10 ms)
-    × DELETE /tasks/:id debería eliminar una tarea existente (10 ms)
-
-  ● Pruebas express › POST /tasks debería crear una nueva tarea
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: 201
-    Received: 404
-
-      17 |       .send(nuevaTarea);
-      18 |
-    > 19 |     expect(respuesta.statusCode).toBe(201);
-         |                                  ^
-      20 |     expect(respuesta.body.title).toBe(nuevaTarea.title);
-      21 |     expect(respuesta.body.description).toBe(nuevaTarea.description);
-      22 |     expect(respuesta.body.completed).toBe(nuevaTarea.completed);
-
-      at Object.toBe (test.js:19:34)
-
-  ● Pruebas express › GET /tasks debería obtener todas las tareas
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: 200
-    Received: 404
-
-      28 |       .get('/tasks');
-      29 |
-    > 30 |     expect(respuesta.statusCode).toBe(200);
-         |                                  ^
-      31 |     expect(Array.isArray(respuesta.body)).toBe(true);
-      32 |   });
-      33 |
-
-      at Object.toBe (test.js:30:34)
-
-  ● Pruebas express › GET /tasks/:id debería obtener una tarea por ID
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: 200
-    Received: 404
-
-      46 |       .get(`/tasks/${crearRespuesta.body.id}`);
-      47 |
-    > 48 |     expect(respuesta.statusCode).toBe(200);
-         |                                  ^
-      49 |     expect(respuesta.body.id).toBe(crearRespuesta.body.id);
-      50 |   });
-      51 |
-
-      at Object.toBe (test.js:48:34)
-
-  ● Pruebas express › PUT /tasks/:id debería actualizar una tarea existente
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: 200
-    Received: 404
-
-      71 |       .send(tareaActualizada);
-      72 |
-    > 73 |     expect(respuesta.statusCode).toBe(200);
-         |                                  ^
-      74 |     expect(respuesta.body.title).toBe(tareaActualizada.title);
-      75 |     expect(respuesta.body.description).toBe(tareaActualizada.description);
-      76 |     expect(respuesta.body.completed).toBe(tareaActualizada.completed);
-
-      at Object.toBe (test.js:73:34)
+    √ POST /Test results saved to test-results.txt
+9 ms)
+    √ GET /tasks debería obtener todas las tareas (6 ms)
+    √ GET /tasks/:id debería obtener una tarea por ID (11 ms)
+    √ PUT /tasks/:id debería actualizar una tarea existente (11 ms)
+    × DELETE /tasks/:id debería eliminar una tarea existente (16 ms)
 
   ● Pruebas express › DELETE /tasks/:id debería eliminar una tarea existente
 
     expect(received).toBe(expected) // Object.is equality
 
-    Expected: 200
-    Received: 404
+    Expected: 404
+    Received: 200
 
-      91 |       .delete(`/tasks/${crearRespuesta.body.id}`);
-      92 |
-    > 93 |     expect(respuesta.statusCode).toBe(200);
-         |                                  ^
-      94 |
-      95 |     // Intenta obtener la tarea eliminada y verifica que no exista
-      96 |     const obtenerRespuesta = await request(app)
+       97 |       .get(`/tasks/${crearRespuesta.body.id}`);
+       98 |
+    >  99 |     expect(obtenerRespuesta.statusCode).toBe(404);
+          |                                         ^
+      100 |   });
+      101 | });
+      102 |
 
-      at Object.toBe (test.js:93:34)
+      at Object.toBe (test.js:99:41)
 
 Test Suites: 1 failed, 1 total
-Tests:       5 failed, 5 total
+Tests:       1 failed, 4 passed, 5 total
 Snapshots:   0 total
-Time:        1.146 s, estimated 2 s
+Time:        0.831 s, estimated 2 s
 Ran all test suites.
