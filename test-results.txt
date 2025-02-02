@@ -1,31 +1,14 @@
-FAIL ./test.js
+PASS ./test.js
   Pruebas express
     √ POST /Test results saved to test-results.txt
-9 ms)
-    √ GET /tasks debería obtener todas las tareas (6 ms)
-    √ GET /tasks/:id debería obtener una tarea por ID (11 ms)
-    √ PUT /tasks/:id debería actualizar una tarea existente (11 ms)
-    × DELETE /tasks/:id debería eliminar una tarea existente (16 ms)
+8 ms)
+    √ GET /tasks debería obtener todas las tareas (8 ms)
+    √ GET /tasks/:id debería obtener una tarea por ID (14 ms)
+    √ PUT /tasks/:id debería actualizar una tarea existente (17 ms)
+    √ DELETE /tasks/:id debería eliminar una tarea existente (20 ms)
 
-  ● Pruebas express › DELETE /tasks/:id debería eliminar una tarea existente
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: 404
-    Received: 200
-
-       97 |       .get(`/tasks/${crearRespuesta.body.id}`);
-       98 |
-    >  99 |     expect(obtenerRespuesta.statusCode).toBe(404);
-          |                                         ^
-      100 |   });
-      101 | });
-      102 |
-
-      at Object.toBe (test.js:99:41)
-
-Test Suites: 1 failed, 1 total
-Tests:       1 failed, 4 passed, 5 total
+Test Suites: 1 passed, 1 total
+Tests:       5 passed, 5 total
 Snapshots:   0 total
-Time:        0.831 s, estimated 2 s
+Time:        0.988 s, estimated 2 s
 Ran all test suites.
