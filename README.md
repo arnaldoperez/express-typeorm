@@ -1,63 +1,21 @@
-# Crea una api con express
+# Plantilla de Express y TypeORM en VanillaJs
 
-Imagina que trabajas para una pequeña empresa de desarrollo de software que está creando una aplicación de gestión de tareas para equipos. Necesitas diseñar la API que permitirá a los usuarios crear, leer, actualizar y eliminar tareas. Sin embargo, por ahora, la empresa no cuenta con una base de datos, por lo que deberás almacenar la información en memoria (usando un objeto o arreglo en JavaScript).
+Este proyecto es una API REST simple construida con Express.js para administrar tareas. Proporciona endpoints para crear, leer, actualizar y eliminar tareas. Utiliza TypeORM para la persistencia de datos en una base de datos PostgreSQL. Las pruebas unitarias están implementadas con Jest y Supertest.
 
-Requisitos del examen
-Creación del proyecto:
+## Archivos
 
-- Crea un nuevo proyecto de Node.js.
-- Instala las dependencias necesarias: express.
-- Crea el archivo principal de la aplicación (index.js o similar).
+Este proyecto de API REST para gestionar tareas usa Express.js y tiene la siguiente estructura de archivos importantes:
 
-## Definición de rutas:
+- `app.js`: Este es el archivo principal de la aplicación Express.js. Define las rutas, middlewares y la lógica de manejo de peticiones. Inicializa la conexión a la base de datos, define los endpoints para la gestión de tareas (CRUD) y maneja las respuestas. Sin embargo, el código actual presenta un problema: mezcla la lógica de persistencia en memoria (el array tasks) con la intención de usar TypeORM y PostgreSQL. El código que interactúa con tasks debería ser reemplazado por interacciones con el repositorio de TypeORM.
 
-Crea las siguientes rutas para la API:
-- `POST /tasks`: Crea una nueva tarea y retorna como respuesta el objeto de la tarea creada.
-- `GET /tasks`: Obtiene la lista de todas las tareas.
-- `GET /tasks/:id`: Obtiene una tarea específica por su ID.
-- `PUT /tasks/:id`: Actualiza una tarea existente y retorna como respuesta el objeto de la tarea actualizada.
-- `DELETE /tasks/:id`: Elimina una tarea existente.
+- `db/connection.js`: Este archivo configura y exporta la conexión a la base de datos PostgreSQL usando TypeORM. Utiliza variables de entorno (process.env.DATABASE_URL) para la URL de conexión, lo cual es una buena práctica. Define la entidad Tasks para ser usada por TypeORM.
 
+- `db/entities/tasks.js`: Este archivo define la entidad Tasks para TypeORM, especificando las columnas de la tabla "tasks" en la base de datos (como id, title, description, completed).
 
-## Estructura de datos:
+- `index.js`: Este archivo es el punto de entrada de la aplicación. Inicia el servidor Express.js y escucha en el puerto 3000.
 
-Define la estructura de datos para las tareas. Cada tarea debe tener al menos los siguientes campos:
-- id: Un identificador único para la tarea (puedes usar un contador).
-- title: El título de la tarea (texto).
-- description: Una descripción detallada de la tarea (texto).
-- completed: Un valor booleano que indica si la tarea está completada o no.
+- `test.js:` Contiene las pruebas unitarias para la API. Utiliza Jest como framework de pruebas y Supertest para realizar peticiones HTTP a la API. Cubre los endpoints principales (CRUD).
 
+En resumen, la aplicación proporciona una API REST para gestionar tareas, guardando los datos en PostgreSQL. Sin embargo, el código en `app.js` necesita ser corregido para usar TypeORM y la conexión a la base de datos en lugar del array tasks en memoria.
 
-```js
-const tasks = [
-  {
-    id: 1,
-    title: "Diseñar la interfaz de usuario",
-    description: "Crear los mockups y el diseño visual de la aplicación",
-    completed: false,
-  },
-  {
-    id: 2,
-    title: "Implementar la lógica de negocio",
-    description: "Desarrollar las funciones principales de la aplicación",
-    completed: true,
-  },
-];
-```
-## Implementación de la lógica:
-
-Implementa la lógica necesaria en cada ruta para crear, leer, actualizar y eliminar tareas.
-- Almacena las tareas en un objeto o arreglo en memoria.
-- Asegúrate de manejar los posibles errores (por ejemplo, si se intenta obtener una tarea que no existe).
-
-## Criterios de evaluación
-
-- Funcionalidad: La API debe cumplir con todos los requisitos y realizar las operaciones CRUD correctamente.
-
-- Código limpio: El código debe estar bien estructurado, legible y fácil de entender.
-
-- Manejo de errores: La API debe manejar los posibles errores de manera adecuada.
-
-- Documentación: Se valorará la inclusión de comentarios en el código y la creación de un breve documento explicando el funcionamiento de la API.
-
-- Recuerda usar buenas prácticas de programación, como la separación de responsabilidades y el uso de nombres descriptivos para las variables y funciones.
+El resto de los archivos configuran la base de datos, inician el servidor y proveen las pruebas para la API.

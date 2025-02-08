@@ -9,10 +9,7 @@ const connection = new DataSource({
   url: process.env.DATABASE_URL,
   synchronize: true,
   logging: false,
-  entities: [Tasks],
-  migrations: [],
-  subscribers: [],
-  synchronize: true
+  entities: [Tasks]
 });
 
 module.exports= connection
