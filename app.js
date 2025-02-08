@@ -7,10 +7,28 @@ app.use(Express.json())
 
 // Tu código va desde aquí ⬇️
 
+const connection=require("./db/connection.js")
+
+app.use(async (req,res,next)=>{
+  try {
+    await connection.initialize()
+    res.on('finish', () => {
+      console.log("Connection closed")
+      connection.destroy();
+    });
+    console.log("Database connected")    
+  } catch (error) {
+    console.error("Error de conexión a la base de datos",error)
+    return res.status(500).send("Error de conexión a la base de datos")  
+  }
+  next()
+})
 
 const tasks = [];
 let id=0
-app.get("/tasks",(req,res)=>{
+app.get("/tasks",async (req,res)=>{
+  const taskRepository=await connection.getRepository("Task")
+  const tasks=await taskRepository.find()
   return res.status(200).send(tasks)
 })
 
