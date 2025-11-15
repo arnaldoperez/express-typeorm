@@ -1,4 +1,4 @@
-# Plantilla de Express y TypeORM en VanillaJs
+# Plantilla de Express y TypeORM en VanillaJs 
 
 Este proyecto es una API REST simple construida con Express.js para administrar tareas. Proporciona endpoints para crear, leer, actualizar y eliminar tareas. Utiliza TypeORM para la persistencia de datos en una base de datos PostgreSQL. Las pruebas unitarias están implementadas con Jest y Supertest.
 
